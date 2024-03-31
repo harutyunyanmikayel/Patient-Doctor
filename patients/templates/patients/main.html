@@ -1,0 +1,17 @@
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.first_name }}!</p>
+    <h2>Doctors List</h2>
+    <ul>
+        {% for doctor in doctors %}
+            <li><a href="{% url 'doctor_page' doctor_id=doctor.id %}">
+                {{ doctor.name }} {{ doctor.surname }}</a> - {{ doctor.profession }}</li>
+        {% endfor %}
+    </ul>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'register' %}">Register</a>
+{% endif %}

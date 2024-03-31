@@ -1,0 +1,18 @@
+<h2>{{ doctor.name }} {{ doctor.surname }}</h2>
+<p><strong>Profession:</strong> {{ doctor.profession }}</p>
+
+<h3>Available Appointment Slots</h3>
+<ul>
+    {% for app in all_appointments %}
+        <li>
+            {{ app.appointment_time|date:"l, F d, Y" }} at {{ app.appointment_time|time:"g:i A" }}
+            {% if app in appointment_slots %}
+                - <strong>Booked</strong>
+            {% else %}
+                - <a href="{% url 'book_appointment' doctor_id=doctor.id time_id=app.id %}">Book Now</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'main_page' %}">Back to Home</a>

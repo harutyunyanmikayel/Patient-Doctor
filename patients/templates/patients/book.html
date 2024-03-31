@@ -1,0 +1,12 @@
+<h2>Book Appointment</h2>
+<p>Selected Appointment Slot:</p>
+<p><strong>Date:</strong> {{ patient_time.appointment_time|date:"l, F d, Y" }}</p>
+<p><strong>Time:</strong> {{ patient_time.appointment_time|time:"g:i A" }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="doctor_id" value="{{ doctor.id }}">
+    <input type="submit" value="Confirm Booking">
+</form>
+
+<a href="{% url 'doctor_page' doctor_id=doctor.id %}">Back to Doctor's Page</a>
